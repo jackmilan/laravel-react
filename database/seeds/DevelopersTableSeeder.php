@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Game;
+use App\Models\Developer;
 use Illuminate\Database\Seeder;
 
-class GamesTableSeeder extends Seeder
+class DevelopersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class GamesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Game::class, 10)->create();
+        factory(Developer::class, 5)->create();
     }
 }

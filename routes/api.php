@@ -19,4 +19,9 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
     // games
     Route::apiResource('games', 'GamesController');
 
+    // developers
+    Route::apiResource('developers', 'DevelopersController');
+
+    // age ratings
+    Route::apiResource('ratings', 'RatingsController');
 });

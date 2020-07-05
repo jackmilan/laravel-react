@@ -5,6 +5,10 @@ use Illuminate\Database\Seeder;
 
 class DevelopersTableSeeder extends Seeder
 {
+    protected $developers = [
+        'Rockstar', 'Konami', 'EA', 'Ubisoft', 'Kojima Production'
+    ];
+
     /**
      * Run the database seeds.
      *
@@ -12,6 +16,10 @@ class DevelopersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Developer::class, 5)->create();
+        foreach ($this->developers  as $developer) {
+            Developer::create([
+                'title' => $developer
+            ]);
+        }
     }
 }

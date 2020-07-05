@@ -9,8 +9,8 @@ class Game extends Model
     protected $fillable = [
         'title',
         'description',
-        'developer',
-        'age_rating',
+        'developer_id',
+        'rating_id',
         'avatar',
         'trailer_link',
         'release_date',

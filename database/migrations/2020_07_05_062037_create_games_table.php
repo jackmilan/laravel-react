@@ -18,7 +18,7 @@ class CreateGamesTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('developer_id');
-            $table->integer('age_rating_id');
+            $table->integer('rating_id');
             $table->string('avatar')->nullable();
             $table->text('trailer_link')->nullable();
             $table->date('release_date');

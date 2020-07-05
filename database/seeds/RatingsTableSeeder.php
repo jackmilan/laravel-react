@@ -40,7 +40,7 @@ class RatingsTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach (self::$ratings as $rating) {
+        foreach ($this->ratings as $rating) {
             Rating::create([
                 'color' => $rating['color'],
                 'min_age' => $rating['min_age'],

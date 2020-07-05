@@ -1,8 +1,8 @@
-import React from 'react';
-import { Container } from 'react-bootstrap';
+import React from "react";
+import { Container } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
-import Home from '../pages/Home';
-import Create from '../pages/Create';
+import Home from "../pages/Home";
+import Create from "../pages/Create";
 
 export default () => {
     return (
@@ -12,5 +12,5 @@ export default () => {
                 <Route path="/create" component={Create} exact />
             </Switch>
         </Container>
-    )
-}
+    );
+};

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Game\Create;
 use App\Http\Requests\Game\Edit;
-use App\Models\Games\Game;
+use App\Models\Game;
 
 class GamesController extends Controller
 {

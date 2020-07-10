@@ -1,8 +1,8 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
-import Home from "../pages/home";
-import Create from "../pages/create-game";
+import Home from "../pages/home/Index";
+import Create from "../pages/create-game/Index";
 
 export default () => {
     return (

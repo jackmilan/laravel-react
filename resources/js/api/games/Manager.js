@@ -8,6 +8,10 @@ class Manager {
     getGames() {
         return axios.get(`${this.baseURL}/`);
     }
+
+    createGame(data) {
+        return axios.post(`${this.baseURL}/create`, data);
+    }
 }
 
 export default new Manager();

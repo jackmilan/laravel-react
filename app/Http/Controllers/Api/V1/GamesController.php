@@ -16,7 +16,7 @@ class GamesController extends Controller
         return response()->json($games, 200);
     }
 
-    public function store(Create $request)
+    public function create(Create $request)
     {
         $game = Game::create([
             'title' => $request->input('title'),

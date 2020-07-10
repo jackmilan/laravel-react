@@ -9,6 +9,8 @@ export default ({ rating, setRating }) => {
         try {
             const { data } = await Manager.getRatings();
             setRatings(data);
+
+            setRating(data[0]['id']);
         } catch (e) {
             console.error("e", e);
         }

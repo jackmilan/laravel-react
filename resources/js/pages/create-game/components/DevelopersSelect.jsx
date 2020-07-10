@@ -9,6 +9,8 @@ export default ({ developer, setDeveloper }) => {
         try {
             const { data } = await Manager.getDevelopers();
             setDevelopers(data);
+
+            setDeveloper(data[0]['id']);
         } catch (e) {
             console.error("e", e);
         }

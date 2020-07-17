@@ -19,7 +19,7 @@ const CreateGame = ({ addGame }) => {
     const [description, setDescription] = useState("Test TExt");
     const [developer, setDeveloper] = useState("");
     const [rating, setRating] = useState("");
-    const [releaseDate, setReleaseDate] = useState("2020-07-16");
+    const [releaseDate, setReleaseDate] = useState("");
 
     const [isLoading, setLoading] = useState(false);
 
@@ -56,8 +56,6 @@ const CreateGame = ({ addGame }) => {
     const handleReset = () => {
         setTitle('');
         setDescription('');
-        
-        setDefaultDeveloper();
     };
 
     return (
@@ -97,7 +95,6 @@ const CreateGame = ({ addGame }) => {
                         </Form.Group>
 
                         <DevelopersSelect
-                            setDefaultDeveloper={setDefaultDeveloper}
                             developer={developer}
                             setDeveloper={setDeveloper}
                         />

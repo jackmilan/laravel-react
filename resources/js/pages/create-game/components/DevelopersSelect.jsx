@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import Manager from "../../../api/developers/Manager";
 
-export default ({ developer, setDeveloper, setDefaultDeveloper }) => {
+export default ({ developer, setDeveloper }) => {
     const [developers, setDevelopers] = useState([]);
 
     const getDevelopers = async () => {
@@ -19,11 +19,7 @@ export default ({ developer, setDeveloper, setDefaultDeveloper }) => {
     useEffect(() => {
         getDevelopers();
     }, []);
-
-    const setDefaultDeveloper = () => {
-        setDeveloper(developers[0]["id"]);
-    };
-
+    
     return (
         <Form.Group controlId="formDeveloper">
             <Form.Label>Developer</Form.Label>

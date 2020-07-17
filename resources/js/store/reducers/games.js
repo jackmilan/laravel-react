@@ -1,4 +1,4 @@
-import { SET_GAMES, ADD_GAME } from "../../actionTypes";
+import { SET_GAMES, ADD_GAME } from "../actionTypes";
 
 const defaultState = {
   games: []

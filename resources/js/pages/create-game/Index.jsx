@@ -4,17 +4,18 @@ import { Card, Form, Button } from "react-bootstrap";
 import DevelopersSelect from "./components/DevelopersSelect";
 import RatingsSelect from "./components/RatingsSelect";
 import LoadingButton from "./components/LoadingButton";
-import { addGame } from "../../store/actions";
+import { addGame, toggleToastr } from "../../store/actions";
 import validation from "./helpers/formValidation";
 import Manager from "../../api/games/Manager";
 
 const mapDispatchToProps = dispatch => {
     return {
-        addGame: game => dispatch(addGame(game))
+        addGame: game => dispatch(addGame(game)),
+        toggleToastr: showToastr => dispatch(toggleToastr(showToastr))
     };
 };
 
-const CreateGame = ({ addGame }) => {
+const CreateGame = ({ addGame, toggleToastr }) => {
     const [title, setTitle] = useState("Test");
     const [description, setDescription] = useState("Test TExt");
     const [developer, setDeveloper] = useState("");
@@ -27,6 +28,7 @@ const CreateGame = ({ addGame }) => {
 
     const handleSubmit = async e => {
         e.preventDefault();
+
         setLoading(true);
 
         setErrors(

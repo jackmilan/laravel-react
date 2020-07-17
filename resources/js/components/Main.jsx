@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
 import Home from "../pages/home/Index";
 import Create from "../pages/create-game/Index";
+import Toastr from './Toastr';
 
 export default () => {
     return (
@@ -11,6 +12,8 @@ export default () => {
                 <Route path="/" component={Home} exact />
                 <Route path="/create" component={Create} exact />
             </Switch>
+
+            <Toastr />
         </Container>
     );
 };

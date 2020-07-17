@@ -30,7 +30,7 @@ export default ({ rating, setRating }) => {
                 onChange={event => setRating(event.target.value)}
             >
                 {ratings.map(r => (
-                    <option key={r.id}>+{r.min_age}</option>
+                    <option key={r.id} value={r.id}>+{r.min_age}</option>
                 ))}
             </Form.Control>
         </Form.Group>

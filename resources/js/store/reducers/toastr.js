@@ -1,4 +1,4 @@
-import { TOGGLE_TOASTR } from '../actionTypes';
+import { CALL_TOASTR } from '../actionTypes';
 
 const defaultState = {
   show: false,
@@ -9,14 +9,14 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case TOGGLE_TOASTR:
+    case CALL_TOASTR:
       const { show, color, status, text } = action.payload;
 
       return {
         ...state,
         show: show || false,
-        color: color || 'red',
-        status: status || 'Error',
+        color: color || '',
+        status: status || '',
         text: text || '',
       };
     default:

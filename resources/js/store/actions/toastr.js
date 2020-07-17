@@ -1,5 +1,5 @@
-import { TOGGLE_TOASTR } from '../actionTypes';
+import { CALL_TOASTR } from '../actionTypes';
 
-export function toggleToastr(payload) {
-    return { type: TOGGLE_TOASTR, payload }
+export function callToastr(payload) {
+    return { type: CALL_TOASTR, payload }
 };

@@ -29,7 +29,7 @@ class Create extends FormRequest
             'developer_id' => 'required|exists:developers,id',
             'rating_id' => 'required|exists:ratings,id',
             'trailer_link' => 'nullable|max:500',
-            // 'release_date' => 'required|date',
+            'release_date' => 'required|date',
         ];
     }
 }

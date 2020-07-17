@@ -1,63 +1,92 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 import { Card, Form, Button } from "react-bootstrap";
 import DevelopersSelect from "./components/DevelopersSelect";
 import RatingsSelect from "./components/RatingsSelect";
 import LoadingButton from "./components/LoadingButton";
-import { addGame, toggleToastr } from "../../store/actions";
-import validation from "./helpers/formValidation";
+import { addGame, callToastr } from "../../store/actions";
 import Manager from "../../api/games/Manager";
 
 const mapDispatchToProps = dispatch => {
     return {
         addGame: game => dispatch(addGame(game)),
-        toggleToastr: showToastr => dispatch(toggleToastr(showToastr))
+        callToastr: showToastr => dispatch(callToastr(showToastr))
     };
 };
 
-const CreateGame = ({ addGame, toggleToastr }) => {
-    const [title, setTitle] = useState("Test");
-    const [description, setDescription] = useState("Test TExt");
-    const [developer, setDeveloper] = useState("");
-    const [rating, setRating] = useState("");
-    const [releaseDate, setReleaseDate] = useState("");
-
+const CreateGame = ({ addGame, callToastr, history }) => {
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [developer_id, setDeveloper] = useState("");
+    const [rating_id, setRating] = useState("");
+    const [release_date, setReleaseDate] = useState("");
+    
     const [isLoading, setLoading] = useState(false);
-
+    
     const [errors, setErrors] = useState({});
-
+    
     const handleSubmit = async e => {
         e.preventDefault();
-
+        
         setLoading(true);
-
-        setErrors(
-            validation({
-                title,
-                description
-            })
-        );
-
+        setErrors({});
+        
         try {
             const { data } = await Manager.createGame({
                 title,
                 description,
-                developer_id: developer,
-                rating_id: rating,
-                release_date: releaseDate
+                developer_id,
+                rating_id,
+                release_date
             });
 
-            addGame(data);
+            successCreate(data);
         } catch (e) {
-            console.error("e", e);
+            errorCreate(e);
         } finally {
             setLoading(false);
         }
     };
 
+    const successCreate = data => {
+        addGame(data);
+
+        callToastr({
+            show: true,
+            color: 'green',
+            status: 'Success',
+            text: 'Game successfully added',
+        });
+
+        history.push('/');
+    }
+
+    const errorCreate = e => {
+        const { data: { message, errors }, status } = e.response;
+
+        if (status === 422) {
+            const errorFields = {};
+
+            for (const [key, value] of Object.entries(errors)) {
+                errorFields[key] = value.shift();
+            }
+
+            setErrors(errorFields);
+        }
+
+        callToastr({
+            show: true,
+            color: 'red',
+            status: 'Error',
+            text: message,
+        })
+    }
+
     const handleReset = () => {
         setTitle('');
         setDescription('');
+        setErrors({});
     };
 
     return (
@@ -97,24 +126,24 @@ const CreateGame = ({ addGame, toggleToastr }) => {
                         </Form.Group>
 
                         <DevelopersSelect
-                            developer={developer}
+                            developer={developer_id}
                             setDeveloper={setDeveloper}
                         />
 
-                        <RatingsSelect rating={rating} setRating={setRating} />
+                        <RatingsSelect rating={rating_id} setRating={setRating} />
 
                         <Form.Group controlId="formReleaseDate">
                             <Form.Label>Relise date</Form.Label>
                             <Form.Control
                                 type="date"
-                                value={releaseDate}
+                                value={release_date}
                                 onChange={event =>
                                     setReleaseDate(event.target.value)
                                 }
-                                isInvalid={errors.releaseDate}
+                                isInvalid={errors.release_date}
                             />
                             <Form.Control.Feedback type="invalid">
-                                {errors.title}
+                                {errors.release_date}
                             </Form.Control.Feedback>
                         </Form.Group>
 
@@ -137,4 +166,4 @@ const CreateGame = ({ addGame, toggleToastr }) => {
     );
 };
 
-export default connect(null, mapDispatchToProps)(CreateGame);
+export default connect(null, mapDispatchToProps)(withRouter(CreateGame));

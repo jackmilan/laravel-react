@@ -30,7 +30,7 @@ export default ({ developer, setDeveloper }) => {
                 onChange={event => setDeveloper(event.target.value)}
             >
                 {developers.map(d => (
-                    <option key={d.id}>{d.title}</option>
+                    <option key={d.id} value={d.id}>{d.title}</option>
                 ))}
             </Form.Control>
         </Form.Group>

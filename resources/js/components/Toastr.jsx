@@ -1,7 +1,7 @@
 import React from 'react';
 import { Toast } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { toggleToastr } from '../store/actions';
+import { callToastr } from '../store/actions';
 
 const styles = {
     toastCard: {
@@ -25,15 +25,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        toggleToastr: show => dispatch(toggleToastr(show))
+        callToastr: show => dispatch(callToastr(show))
     }
 }
 
-const Toastr = ({ show, color, status, text, toggleToastr }) => {
+const Toastr = ({ show, color, status, text, callToastr }) => {
     return (
         <Toast
             style={{...styles.toastCard, background: color }}
-            onClose={() => toggleToastr({ show: false })}
+            onClose={() => callToastr({ show: false })}
             show={show}
             autohide
         >

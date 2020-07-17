@@ -1,59 +1,68 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Card, Form, Button } from "react-bootstrap";
 import DevelopersSelect from "./components/DevelopersSelect";
 import RatingsSelect from "./components/RatingsSelect";
-import LoadingButton from './components/LoadingButton';
+import LoadingButton from "./components/LoadingButton";
+import { addGame } from "../../store/actions";
+import validation from "./helpers/formValidation";
+import Manager from "../../api/games/Manager";
 
-import validation from './helpers/formValidation';
-import Manager from '../../api/games/Manager';
+const mapDispatchToProps = dispatch => {
+    return {
+        addGame: game => dispatch(addGame(game))
+    };
+};
 
-export default () => {
+const CreateGame = ({ addGame }) => {
     const [title, setTitle] = useState("Test");
     const [description, setDescription] = useState("Test TExt");
     const [developer, setDeveloper] = useState("");
     const [rating, setRating] = useState("");
+    const [releaseDate, setReleaseDate] = useState("2020-07-16");
 
     const [isLoading, setLoading] = useState(false);
 
     const [errors, setErrors] = useState({});
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
         setLoading(true);
 
         setErrors(
             validation({
                 title,
-                description,
+                description
             })
         );
 
         try {
-            const { data } = Manager.createGame({
+            const { data } = await Manager.createGame({
                 title,
                 description,
                 developer_id: developer,
-                rating_id: rating
-            })
+                rating_id: rating,
+                release_date: releaseDate
+            });
 
-            if (data) {
-                console.log(data);
-            }
+            addGame(data);
         } catch (e) {
-            console.log('e', e)
+            console.error("e", e);
         } finally {
             setLoading(false);
         }
     };
 
     const handleReset = () => {
-        console.log("reset");
+        setTitle('');
+        setDescription('');
+        
+        setDefaultDeveloper();
     };
 
     return (
         <div>
             <h1 className="pb-4">Create game card</h1>
-
             <Card>
                 <Card.Body>
                     <Form>
@@ -88,14 +97,27 @@ export default () => {
                         </Form.Group>
 
                         <DevelopersSelect
+                            setDefaultDeveloper={setDefaultDeveloper}
                             developer={developer}
                             setDeveloper={setDeveloper}
                         />
 
-                        <RatingsSelect
-                            rating={rating}
-                            setRating={setRating}
-                        />
+                        <RatingsSelect rating={rating} setRating={setRating} />
+
+                        <Form.Group controlId="formReleaseDate">
+                            <Form.Label>Relise date</Form.Label>
+                            <Form.Control
+                                type="date"
+                                value={releaseDate}
+                                onChange={event =>
+                                    setReleaseDate(event.target.value)
+                                }
+                                isInvalid={errors.releaseDate}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.title}
+                            </Form.Control.Feedback>
+                        </Form.Group>
 
                         <LoadingButton
                             isLoading={isLoading}
@@ -115,3 +137,5 @@ export default () => {
         </div>
     );
 };
+
+export default connect(null, mapDispatchToProps)(CreateGame);

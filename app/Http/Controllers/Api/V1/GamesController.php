@@ -27,7 +27,7 @@ class GamesController extends Controller
             'release_date' => $request->input('release_date'),
         ]);
 
-        return response()->json($game, 204);
+        return response()->json($game, 201);
     }
 
     public function update(Edit $request, $id)
@@ -43,7 +43,7 @@ class GamesController extends Controller
             'release_date' => $request->input('release_date'),
         ]);
 
-        return response()->json($game, 204);
+        return response()->json($game, 201);
     }
 
     public function destroy($id)

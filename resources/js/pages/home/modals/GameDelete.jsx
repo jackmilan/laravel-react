@@ -1,19 +1,40 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { deleteGame } from '../../../store/actions';
+import { deleteGame, callToastr } from '../../../store/actions';
+import Manager from '../../../api/games/Manager';
 
 const mapDispatchToProps = dispatch => {
     return {
         deleteGame: id => dispatch(deleteGame(id)),
+        callToastr: toastrData => dispatch(callToastr(toastrData)),
     }
 };
 
-const GameDelete = ({ game, show, setShow, deleteGame }) => {
+const GameDelete = ({ game, show, setShow, deleteGame, callToastr }) => {
 
-    const handleDelete = () => {
-        deleteGame(game.id);
-        setShow(false);
+    const handleDelete = async () => {
+        try {
+            await Manager.deleteGame(game.id);
+
+            callToastr({
+                show: true,
+                status: 'Success',
+                text: `${game.title} successfully removed`,
+                color: 'green'
+            });
+
+            deleteGame(game.id);
+
+            setShow(false);
+        } catch (e) {
+            callToastr({
+                show: true,
+                status: 'Error',
+                text: e.response.data.message,
+                color: 'red'
+            });
+        }
     }
 
     return (

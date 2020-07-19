@@ -12,6 +12,10 @@ class Manager {
     createGame(data) {
         return axios.post(`${this.baseURL}/create`, data);
     }
+
+    deleteGame(id) {
+        return axios.delete(`${this.baseURL}/${id}`);
+    }
 }
 
 export default new Manager();

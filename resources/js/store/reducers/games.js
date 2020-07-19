@@ -1,4 +1,4 @@
-import { SET_GAMES, ADD_GAME } from "../actionTypes";
+import { SET_GAMES, ADD_GAME, DELETE_GAME } from "../actionTypes";
 
 const defaultState = {
   games: []
@@ -16,6 +16,12 @@ export default (state = defaultState, action) => {
         ...state,
         games: state.games.concat(action.payload)
       }
+    case DELETE_GAME:
+      return {
+        ...state,
+        games: state.games.filter(game => +game.id !== +action.payload)
+      }
+
     default:
       return state
   }

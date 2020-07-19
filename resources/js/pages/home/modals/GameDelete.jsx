@@ -1,7 +1,21 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { deleteGame } from '../../../store/actions';
 
-const GameDelete = ({ game, show, setShow }) => {
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteGame: id => dispatch(deleteGame(id)),
+    }
+};
+
+const GameDelete = ({ game, show, setShow, deleteGame }) => {
+
+    const handleDelete = () => {
+        deleteGame(game.id);
+        setShow(false);
+    }
+
     return (
         <Modal show={show} onHide={() => setShow(false)}>
             <Modal.Header closeButton>
@@ -12,7 +26,7 @@ const GameDelete = ({ game, show, setShow }) => {
                 <Button variant="secondary" onClick={() => setShow(false)}>
                     Close
                 </Button>
-                <Button variant="danger" onClick={() => setShow(false)}>
+                <Button variant="danger" onClick={handleDelete}>
                     Delete
                 </Button>
             </Modal.Footer>
@@ -20,4 +34,4 @@ const GameDelete = ({ game, show, setShow }) => {
     )
 }
 
-export default GameDelete;
+export default connect(null, mapDispatchToProps)(GameDelete);

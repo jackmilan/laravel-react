@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-
 import Manager from "../../api/games/Manager";
 import { setGames } from "../../store/actions";
 import GameCard from "./components/GameCard";
@@ -17,6 +16,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const Home = ({ games, setGames }) => {
+
     const getGames = async () => {
         try {
             const { data } = await Manager.getGames();

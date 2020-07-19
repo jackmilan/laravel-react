@@ -16,11 +16,11 @@ const mapDispatchToProps = dispatch => {
 };
 
 const CreateGame = ({ addGame, callToastr, history }) => {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+    const [title, setTitle] = useState("Default title");
+    const [description, setDescription] = useState("Default Text");
     const [developer_id, setDeveloper] = useState("");
     const [rating_id, setRating] = useState("");
-    const [release_date, setReleaseDate] = useState("");
+    const [release_date, setReleaseDate] = useState("2020-01-01");
     
     const [isLoading, setLoading] = useState(false);
     
@@ -50,7 +50,7 @@ const CreateGame = ({ addGame, callToastr, history }) => {
     };
 
     const successCreate = data => {
-        addGame(data);
+        // addGame(data);
 
         callToastr({
             show: true,
@@ -59,7 +59,7 @@ const CreateGame = ({ addGame, callToastr, history }) => {
             text: 'Game successfully added',
         });
 
-        history.push('/');
+        // history.push('/');
     }
 
     const errorCreate = e => {

@@ -24,8 +24,6 @@ const GameDelete = ({ game, show, setShow, deleteGame, callToastr }) => {
                 color: 'green'
             });
 
-            deleteGame(game.id);
-
             setShow(false);
         } catch (e) {
             callToastr({

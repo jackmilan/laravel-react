@@ -1,36 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import Manager from "../../api/games/Manager";
-import { setGames } from "../../store/actions";
 import GameCard from "./components/GameCard";
 
 const mapStateToProps = state => {
     return { games: state.gamesReducer.games };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        setGames: games => dispatch(setGames(games))
-    };
-};
-
-const Home = ({ games, setGames }) => {
-
-    const getGames = async () => {
-        try {
-            const { data } = await Manager.getGames();
-
-            setGames(data);
-        } catch (e) {
-            console.error(e);
-        }
-    };
-
-    useEffect(() => {
-        getGames();
-    }, []);
-
+const Home = ({ games }) => {
     return (
         <div>
             <h1 className="pb-4">Games</h1>
@@ -48,4 +25,4 @@ const Home = ({ games, setGames }) => {
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);

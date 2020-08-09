@@ -14,11 +14,11 @@ export default () => {
     return (
         <Navbar style={styles.navbar} bg="dark" variant="dark">
             <Navbar.Brand>
-                <Link to="/">Laravel + React</Link>
+                <Link className="text-white" to="/">Laravel + React</Link>
             </Navbar.Brand>
             <Nav className="mr-auto">
-                <Link to="/">Home</Link>
-                <Link className="ml-3" to="/create">
+                <Link className="text-white" to="/">Home</Link>
+                <Link className="ml-3 text-white" to="/create">
                     Create
                 </Link>
             </Nav>

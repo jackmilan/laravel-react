@@ -9,8 +9,16 @@ class Manager {
         return axios.get(`${this.baseURL}/`);
     }
 
+    getGame(id) {
+        return axios.get(`${this.baseURL}/${id}`);
+    }
+
     createGame(data) {
-        return axios.post(`${this.baseURL}/create`, data);
+        return axios.post(`${this.baseURL}/`, data);
+    }
+
+    editGame(data, id) {
+        return axios.put(`${this.baseURL}/${id}`, data);
     }
 
     deleteGame(id) {

@@ -17,11 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
 
     // games
-    Route::group(['prefix' => 'games'], function () {
-        Route::get('/', 'GamesController@index');
-        Route::post('create', 'GamesController@create');
-        Route::delete('{id}', 'GamesController@destroy');
-    });
+    Route::apiResource('games', 'GamesController');
 
     // developers
     Route::apiResource('developers', 'DevelopersController');

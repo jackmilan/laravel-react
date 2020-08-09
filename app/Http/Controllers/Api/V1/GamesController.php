@@ -16,7 +16,14 @@ class GamesController extends Controller
         return response()->json($games, 200);
     }
 
-    public function create(Create $request)
+    public function show($id)
+    {
+        $game = Game::findOrFail($id);
+
+        return response()->json($game, 200);
+    }
+
+    public function store(Create $request)
     {
         $game = Game::create([
             'title' => $request->input('title'),
@@ -42,6 +49,8 @@ class GamesController extends Controller
             'trailer_link' => $request->input('trailer_link'),
             'release_date' => $request->input('release_date'),
         ]);
+
+        $game->save();
 
         return response()->json($game, 201);
     }

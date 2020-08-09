@@ -13,7 +13,7 @@ class Edit extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,12 +24,12 @@ class Edit extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'requred|min:2,max:190',
-            'description' => 'requred|min:8,max:500',
-            'developer_id' => 'requred|exists:developers,id',
-            'rating_id' => 'requred|exists:ratings,id',
+            'title' => 'required|min:2,max:190',
+            'description' => 'required|min:8,max:500',
+            'developer_id' => 'required|exists:developers,id',
+            'rating_id' => 'required|exists:ratings,id',
             'trailer_link' => 'nullable|max:500',
-            'release_date' => 'requred|date',
+            'release_date' => 'required|date',
         ];
     }
 }

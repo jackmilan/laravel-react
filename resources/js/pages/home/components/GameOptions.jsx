@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
+
 import GameDeleteModal from '../modals/GameDelete';
 
 const styles = {
@@ -9,7 +11,7 @@ const styles = {
     }
 };
 
-export default ({ game }) => {
+const GameOptions = ({ game, history }) => {
     const [showDelete, setShowDelete] = useState(false);
 
     return (
@@ -18,6 +20,7 @@ export default ({ game }) => {
                 variant="info"
                 title="Options"
             >
+                <Dropdown.Item onClick={() => history.push(`/edit/${game.id}`)} eventKey="1">Edit</Dropdown.Item>
                 <Dropdown.Item onClick={() => setShowDelete(true)} eventKey="1">Delete</Dropdown.Item>
             </DropdownButton>
 
@@ -25,3 +28,5 @@ export default ({ game }) => {
         </div>
     );
 };
+
+export default withRouter(GameOptions);

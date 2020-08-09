@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Events\GameAdd as GameAddEvent;
 use App\Events\GameDelete as GameDeleteEvent;
+use App\Events\GameUpdate as GameUpdateEvent;
 use App\Models\Game;
 
 class GameObserver
@@ -25,9 +26,9 @@ class GameObserver
      * @param  \App\Game  $game
      * @return void
      */
-    public function updated(Game $game)
+    public function updating(Game $game)
     {
-        //
+        broadcast(new GameUpdateEvent($game));
     }
 
     /**

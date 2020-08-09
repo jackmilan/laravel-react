@@ -36,7 +36,7 @@ const Home = ({ games, setGames }) => {
             <h1 className="pb-4">Games</h1>
 
             <Row>
-                {games.map(game => {
+                {games.sort((a, b) => b.id - a.id).map(game => {
                     return (
                         <Col className="pb-4" lg="4" sm="6" key={game.id}>
                             <GameCard game={game} />

@@ -5,17 +5,16 @@ import { Card, Form, Button } from "react-bootstrap";
 import DevelopersSelect from "./components/DevelopersSelect";
 import RatingsSelect from "./components/RatingsSelect";
 import LoadingButton from "./components/LoadingButton";
-import { addGame, callToastr } from "../../store/actions";
+import { callToastr } from "../../store/actions";
 import Manager from "../../api/games/Manager";
 
 const mapDispatchToProps = dispatch => {
     return {
-        addGame: game => dispatch(addGame(game)),
         callToastr: showToastr => dispatch(callToastr(showToastr))
     };
 };
 
-const CreateGame = ({ addGame, callToastr, history }) => {
+const CreateGame = ({ callToastr, history }) => {
     const [title, setTitle] = useState("Default title");
     const [description, setDescription] = useState("Default Text");
     const [developer_id, setDeveloper] = useState("");
@@ -50,8 +49,6 @@ const CreateGame = ({ addGame, callToastr, history }) => {
     };
 
     const successCreate = data => {
-        // addGame(data);
-
         callToastr({
             show: true,
             color: 'green',
@@ -59,7 +56,7 @@ const CreateGame = ({ addGame, callToastr, history }) => {
             text: 'Game successfully added',
         });
 
-        // history.push('/');
+        history.push('/');
     }
 
     const errorCreate = e => {
